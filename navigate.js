@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
+import { Image, Text, View } from "react-native";
 import AppLoading from 'expo-app-loading'
 import { fonts } from './fonts'
+import { MyHeader } from './header'
+import { CustomSidebarMenu } from './sidebar'
 import Dashboard from './components/Dashboard'
 import Subjects from './components/Subjects'
 import Schedule from './components/Schedule'
@@ -48,23 +51,41 @@ export default function Navigate() {
   if (font) {
     return (
       <NavigationContainer>
-        <Drawer.Navigator screenOptions={{
-          drawerStyle: {
-            backgroundColor: "#262859"
-          },
-          drawerLabelStyle: {
-            color: "#fff"
-          }
-        }}>
-          <Drawer.Screen name="Dashboard" component={Dashboard} options={() => DrawerScreenHeaderOptions("Лента")} />
-          <Drawer.Screen name="Subjects" component={Subjects} options={() => DrawerScreenHeaderOptions("Мои предметы")} />
-          <Drawer.Screen name="Schedule" component={Schedule} options={() => DrawerScreenHeaderOptions("Расписание")} />
-          <Drawer.Screen name="ISP" component={ISP} options={() => DrawerScreenHeaderOptions("Индивидуальный учебный план")} />
-          <Drawer.Screen name="Information" component={Information} options={() => DrawerScreenHeaderOptions("Информация")} />
+        <Drawer.Navigator
+          drawerContent={(props) => <CustomSidebarMenu {...props} />}
+          screenOptions={{
+            headerShown: false,
+            drawerStyle: {
+              backgroundColor: "#262859",
+            },
+            drawerLabelStyle: {
+              color: "#fff",
+            },
+          }}
+        >
+          <Drawer.Screen
+            name="Лента"
+            component={Dashboard}
+          />
+          <Drawer.Screen
+            name="Мои предметы"
+            component={Subjects}
+          />
+          <Drawer.Screen
+            name="Расписание"
+            component={Schedule}
+          />
+          <Drawer.Screen
+            name="Индивидуальный учебный план"
+            component={ISP}
+          />
+          <Drawer.Screen
+            name="Информация"
+            component={Information}
+          />
         </Drawer.Navigator>
-        
       </NavigationContainer>
-    )
+    );
   } else {
     return (
       <AppLoading startAsync={fonts} onFinish={() => setFont(true)} onError={console.warn} />
