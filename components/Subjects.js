@@ -3,14 +3,23 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import { DataTable } from 'react-native-paper'
 import { gStyle } from '../styles/style'
 import { subjectStyle } from '../styles/subject'
+import { SubjectModel } from '../database/subjects'
 
 function SubjectElements(subject, key) {
   return (
     <DataTable.Row key={key}>
-      <View>
-        <View>
-          <Text style={{textAlign: "left", fontFamily: "os-bold"}}>Дисциплина</Text>
-          <Text style={{textAlign: "right", fontFamily: "os-regular"}}>{subject.name}</Text>
+      <View style={subjectStyle.tableRow}>
+        <View style={subjectStyle.tableRowElements}>
+          <View>
+            <Text style={{textAlign: "left", fontFamily: "os-bold"}}>Дисциплина</Text>
+          </View>
+          <View>
+            <Text style={{textAlign: "right", fontFamily: "os-regular"}}>{subject.name}</Text>
+          </View>
+        </View>
+        <View style={subjectStyle.tableRowElements}>
+          <Text style={{textAlign: "left", fontFamily: "os-bold"}}>Преподаватель</Text>
+          <Text style={{textAlign: "right", fontFamily: "os-regular"}}>{subject.teacher}</Text>
         </View>
       </View>
     </DataTable.Row>
@@ -19,11 +28,7 @@ function SubjectElements(subject, key) {
 
 export default function Subjects() {
 
-  const [subjects, setSubjects] = useState([
-    {
-      name: "Aaa"
-    }
-  ])
+  const [subjects, setSubjects] = useState(SubjectModel)
 
   return (
     <View style={gStyle.main}>

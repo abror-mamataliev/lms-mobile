@@ -7,17 +7,20 @@ export const subjectStyle = StyleSheet.create({
     backgroundColor: "#ffffff"
   },
   tableRow: {
-    padding: 15,
+    // padding: 15,
     display: "flex",
     alignSelf: "stretch",
-    flexDirection: "row"
+    // flexDirection: "row"
   },
   tableHeadElementText: {
     fontFamily: "os-bold"
   },
   tableRowElements: {
     flex: 1,
-    alignSelf: "stretch"
+    // alignSelf: "stretch",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between"
   },
   hr: {
     borderBottomColor: "black",
