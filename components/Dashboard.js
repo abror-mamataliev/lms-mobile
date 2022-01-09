@@ -1,19 +1,17 @@
-import React from 'react'
+import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { Header } from "./DrawerNavigation";
-import { gStyle } from '../style'
+import { appStyle } from "../style";
 
 export default function Dashboard({ navigation }) {
   return (
-    <ScrollView vertical={true}>
+    <ScrollView vertical={true} style={{ zIndex: 0 }}>
       <Header navigation={navigation} />
-      <View style={gStyle.main}>
-        <Text style={gStyle.title}>Лента</Text>
+      <View style={appStyle.main}>
+        <Text style={appStyle.title}>Лента</Text>
       </View>
     </ScrollView>
   );
 }
 
-const styles = StyleSheet.create({
-  
-})
+const styles = StyleSheet.create({});

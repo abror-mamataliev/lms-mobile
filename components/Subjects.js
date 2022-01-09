@@ -3,218 +3,55 @@ import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FontAwesome } from "@expo/vector-icons";
 import { Header } from "./DrawerNavigation";
-import { gStyle } from "../style";
+import { appStyle, subjectStyle, textBold, textRegular } from "../style";
 
 function SubjectElements(subject, key) {
   return (
-    <View
-      key={key}
-      style={{
-        display: "flex",
-        padding: 10,
-      }}
-    >
-      <View
-        style={{
-          flex: 1,
-          alignSelf: "stretch",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          margin: 10,
-        }}
-      >
-        <View
-          style={{
-            flex: 2,
-            flexDirection: "row",
-            flexWrap: "wrap",
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 16,
-              fontFamily: "os-bold",
-            }}
-          >
-            Дисциплина
-          </Text>
+    <View key={key} style={subjectStyle.table}>
+      <View style={subjectStyle.tableRow}>
+        <View style={subjectStyle.tableRowElement2}>
+          <Text style={textBold}>Дисциплина</Text>
         </View>
-        <View
-          style={{
-            flex: 3,
-            flexDirection: "row",
-            flexWrap: "wrap",
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 16,
-              fontFamily: "os-regular",
-              flex: 1,
-              textAlign: "right",
-            }}
-          >
+        <View style={subjectStyle.tableRowElement3}>
+          <Text style={subjectStyle.tableRowElementRightRegular}>
             {subject.name}
           </Text>
         </View>
       </View>
-      <View
-        style={{
-          flex: 1,
-          alignSelf: "stretch",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          margin: 10,
-        }}
-      >
-        <View
-          style={{
-            flex: 2,
-            flexDirection: "row",
-            flexWrap: "wrap",
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 16,
-              fontFamily: "os-bold",
-            }}
-          >
-            Преподаватель
-          </Text>
+      <View style={subjectStyle.tableRow}>
+        <View style={subjectStyle.tableRowElement2}>
+          <Text style={textBold}>Преподаватель</Text>
         </View>
-        <View
-          style={{
-            flex: 3,
-            flexDirection: "row",
-            flexWrap: "wrap",
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 16,
-              fontFamily: "os-regular",
-              flex: 1,
-              textAlign: "right",
-            }}
-          >
+        <View style={subjectStyle.tableRowElement3}>
+          <Text style={subjectStyle.tableRowElementRightRegular}>
             {subject.teacher}
           </Text>
         </View>
       </View>
-      <View
-        style={{
-          flex: 1,
-          alignSelf: "stretch",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          margin: 10,
-        }}
-      >
-        <View
-          style={{
-            flex: 2,
-            flexDirection: "row",
-            flexWrap: "wrap",
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 16,
-              fontFamily: "os-bold",
-            }}
-          >
-            Кол-во НБ
-          </Text>
+      <View style={subjectStyle.tableRow}>
+        <View style={subjectStyle.tableRowElement2}>
+          <Text style={textBold}>Кол-во НБ</Text>
         </View>
-        <View
-          style={{
-            flex: 3,
-            flexDirection: "row-reverse",
-            flexWrap: "wrap",
-          }}
-        >
-          <TouchableOpacity
-            style={{
-              padding: 5,
-              borderColor: "#1d2d5b",
-              borderRadius: 5,
-              borderWidth: 2,
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 16,
-                fontFamily: "os-regular",
-              }}
-            >
-              {subject.absence_number}
-            </Text>
+        <View style={subjectStyle.tableRowElementReverse3}>
+          <TouchableOpacity style={subjectStyle.button}>
+            <Text style={textRegular}>{subject.absence_number}</Text>
           </TouchableOpacity>
         </View>
       </View>
-      <View
-        style={{
-          flex: 1,
-          alignSelf: "stretch",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          margin: 10,
-        }}
-      >
-        <View
-          style={{
-            flex: 2,
-            flexDirection: "row",
-            flexWrap: "wrap",
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 16,
-              fontFamily: "os-bold",
-            }}
-          >
-            Действие
-          </Text>
+      <View style={subjectStyle.tableRow}>
+        <View style={subjectStyle.tableRowElement2}>
+          <Text style={textBold}>Действие</Text>
         </View>
-        <View
-          style={{
-            flex: 3,
-            flexDirection: "row-reverse",
-            flexWrap: "wrap",
-          }}
-        >
-          <TouchableOpacity
-            style={{
-              padding: 5,
-              borderColor: "#1d2d5b",
-              borderRadius: 5,
-              borderWidth: 2,
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 16,
-                fontFamily: "os-regular",
-              }}
-            >
+        <View style={subjectStyle.tableRowElementReverse3}>
+          <TouchableOpacity style={subjectStyle.button}>
+            <Text style={textRegular}>
               <FontAwesome name="clone" size={16} color="#1d2d5b" />
               <Text> Активности</Text>
             </Text>
           </TouchableOpacity>
         </View>
       </View>
-      <View
-        style={{
-          borderBottomColor: "#dfe2e6",
-          borderBottomWidth: 2,
-        }}
-      ></View>
+      <View style={subjectStyle.hr2}></View>
     </View>
   );
 }
@@ -226,8 +63,8 @@ export default function Subjects({ navigation }) {
     const dataLoad = async () => {
       try {
         const result = await AsyncStorage.getItem("subjects");
-        const info = result != null ? JSON.parse(result) : null;
-        setSubjects(info);
+        const data = result != null ? JSON.parse(result) : null;
+        setSubjects(data);
       } catch (e) {
         console.warn(e);
       }
@@ -239,12 +76,14 @@ export default function Subjects({ navigation }) {
     <View>
       <Header navigation={navigation} />
       <ScrollView vertical={true} style={{ marginBottom: 80 }}>
-        <View style={gStyle.main}>
-          <Text style={gStyle.title}>Мои предметы</Text>
-          <View style={gStyle.mainContainer}>
-            {subjects ? subjects.map((subject, index) => {
-              return SubjectElements(subject, index);
-            }) : null}
+        <View style={appStyle.main}>
+          <Text style={appStyle.title}>Мои предметы</Text>
+          <View style={appStyle.mainContainer}>
+            {subjects
+              ? subjects.map((subject, index) => {
+                  return SubjectElements(subject, index);
+                })
+              : null}
           </View>
         </View>
       </ScrollView>

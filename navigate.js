@@ -1,20 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import { Image, Text, View } from "react-native";
-import AppLoading from 'expo-app-loading'
-import { fonts } from './fonts'
+import AppLoading from "expo-app-loading";
+import { fonts } from "./fonts";
 import { Sidebar } from "./components/DrawerNavigation";
-import Dashboard from './components/Dashboard'
-import Subjects from './components/Subjects'
-import Schedule from './components/Schedule'
-import ISP from './components/ISP'
-import Information from './components/Information'
+import Dashboard from "./components/Dashboard";
+import Subjects from "./components/Subjects";
+import Schedule from "./components/Schedule";
+import ISP from "./components/ISP";
+import Information from "./components/Information";
 
-import { createStackNavigator } from '@react-navigation/stack'
-import { createDrawerNavigator } from '@react-navigation/drawer'
-import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from "@react-navigation/stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { NavigationContainer } from "@react-navigation/native";
 
-const Stack = createStackNavigator()
-const Drawer = createDrawerNavigator()
+const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 // function MainStack() {
 //   return (
@@ -32,21 +32,21 @@ const Drawer = createDrawerNavigator()
 function DrawerScreenHeaderOptions(title) {
   return {
     drawerItemStyle: {
-      color: "#fff"
+      color: "#fff",
     },
     title: title,
     headerStyle: {
-      backgroundColor: '#262859',
+      backgroundColor: "#262859",
     },
-    headerTintColor: '#fff',
+    headerTintColor: "#fff",
     headerTitleStyle: {
-      fontFamily: "os-regular"
-    }
-  }
+      fontFamily: "os-regular",
+    },
+  };
 }
 
 export default function Navigate() {
-  const [font, setFont] = useState(false)
+  const [font, setFont] = useState(false);
   if (font) {
     return (
       <NavigationContainer>
@@ -59,35 +59,25 @@ export default function Navigate() {
             },
             drawerLabelStyle: {
               color: "#fff",
+              fontFamily: "os-regular",
             },
           }}
         >
-          <Drawer.Screen
-            name="Лента"
-            component={Dashboard}
-          />
-          <Drawer.Screen
-            name="Мои предметы"
-            component={Subjects}
-          />
-          <Drawer.Screen
-            name="Расписание"
-            component={Schedule}
-          />
-          <Drawer.Screen
-            name="Индивидуальный учебный план"
-            component={ISP}
-          />
-          <Drawer.Screen
-            name="Информация"
-            component={Information}
-          />
+          <Drawer.Screen name="Лента" component={Dashboard} />
+          <Drawer.Screen name="Мои предметы" component={Subjects} />
+          <Drawer.Screen name="Расписание" component={Schedule} />
+          <Drawer.Screen name="Индивидуальный учебный план" component={ISP} />
+          <Drawer.Screen name="Информация" component={Information} />
         </Drawer.Navigator>
       </NavigationContainer>
     );
   } else {
     return (
-      <AppLoading startAsync={fonts} onFinish={() => setFont(true)} onError={console.warn} />
-    )
+      <AppLoading
+        startAsync={fonts}
+        onFinish={() => setFont(true)}
+        onError={console.warn}
+      />
+    );
   }
 }

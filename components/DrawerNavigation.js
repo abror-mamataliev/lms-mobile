@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Image,
+  Picker,
   SafeAreaView,
   Text,
   TouchableOpacity,
@@ -10,9 +11,11 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { Entypo } from "@expo/vector-icons"; 
+import { Entypo } from "@expo/vector-icons";
 
 export const Header = ({ navigation }) => {
+  const [dropdown, setDropdown] = useState("none")
+  const [selectedValue, setSelectedValue] = useState("java");
   const openMenu = () => {
     navigation.openDrawer();
   };
@@ -29,13 +32,37 @@ export const Header = ({ navigation }) => {
       <TouchableOpacity onPress={openMenu}>
         <Entypo name="menu" size={40} color="black" />
       </TouchableOpacity>
-      <Image
-        style={{
-          width: 40,
-          height: 40,
-        }}
-        source={require("../assets/avatar.jpg")}
-      />
+      <TouchableOpacity onPress={openMenu}>
+        <Image
+          style={{
+            width: 40,
+            height: 40,
+          }}
+          source={require("../assets/avatar.jpg")}
+        />
+        {/* <View
+          style={{
+            position: "absolute",
+            backgroundColor: "#ff0000",
+            marginTop: 20,
+            marginRight: 0,
+            marginLeft: -110,
+            zIndex: 3, // works on ios
+            elevation: 3, // works on android
+          }}
+        >
+          <Picker
+            selectedValue={selectedValue}
+            style={{ height: 50, width: 150 }}
+            onValueChange={(itemValue, itemIndex) =>
+              setSelectedValue(itemValue)
+            }
+          >
+            <Picker.Item label="Java" value="java" />
+            <Picker.Item label="JavaScript" value="js" />
+          </Picker>
+        </View> */}
+      </TouchableOpacity>
     </View>
   );
 };
@@ -55,6 +82,7 @@ export const Sidebar = (props) => {
       <Text
         style={{
           fontSize: 16,
+          fontFamily: "os-regular",
           textAlign: "center",
           color: "grey",
           marginBottom: 20,
