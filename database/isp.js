@@ -148,7 +148,32 @@ export const ISPModel = [
     term: "V-семестр",
     subjects: [
       {
-        name: "",
+        name: "Архитектура компьютера",
+        credit: 6,
+        mark: 0,
+      },
+      {
+        name: "Введение в проектирование цифровых устройств",
+        credit: 6,
+        mark: 0,
+      },
+      {
+        name: "Индивидуальный проект 1",
+        credit: 2,
+        mark: 0,
+      },
+      {
+        name: "Компьютерные сети",
+        credit: 6,
+        mark: 0,
+      },
+      {
+        name: "Открытый предмет по выбору",
+        credit: 4,
+        mark: 0,
+      },
+      {
+        name: "Системы и обработка сигналов",
         credit: 6,
         mark: 0,
       },
@@ -158,7 +183,32 @@ export const ISPModel = [
     term: "VI-семестр",
     subjects: [
       {
-        name: "",
+        name: "Беспроводная связь",
+        credit: 6,
+        mark: 0,
+      },
+      {
+        name: "Встраиваемые системы",
+        credit: 6,
+        mark: 0,
+      },
+      {
+        name: "Индивидуальный проект 2",
+        credit: 2,
+        mark: 0,
+      },
+      {
+        name: "Операционные системы",
+        credit: 6,
+        mark: 0,
+      },
+      {
+        name: "Открытый предмет по выбору",
+        credit: 4,
+        mark: 0,
+      },
+      {
+        name: "Сетевая безопастность",
         credit: 6,
         mark: 0,
       },
@@ -168,7 +218,22 @@ export const ISPModel = [
     term: "VII-семестр",
     subjects: [
       {
-        name: "",
+        name: "ИТ/Спец предмет по выбору",
+        credit: 6,
+        mark: 0,
+      },
+      {
+        name: "ИТ/Спец предмет по выбору",
+        credit: 6,
+        mark: 0,
+      },
+      {
+        name: "Мультимедийные сети связи",
+        credit: 6,
+        mark: 0,
+      },
+      {
+        name: "Системы оптической связи",
         credit: 6,
         mark: 0,
       },
@@ -178,7 +243,17 @@ export const ISPModel = [
     term: "VIII-семестр",
     subjects: [
       {
-        name: "",
+        name: "ИТ/Спец предмет по выбору",
+        credit: 6,
+        mark: 0,
+      },
+      {
+        name: "ИТ/Спец предмет по выбору",
+        credit: 6,
+        mark: 0,
+      },
+      {
+        name: "ИТ/Спец предмет по выбору",
         credit: 6,
         mark: 0,
       },

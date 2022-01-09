@@ -43,7 +43,7 @@ export const subjectStyle = StyleSheet.create({
     flexWrap: "wrap",
   },
   tableButtonValue2: {
-    width: "40%",
+    width: "34%",
     flexDirection: "row",
     flexWrap: "wrap",
   },

@@ -6,81 +6,138 @@ import { gStyle } from '../styles/style'
 import { ispStyle } from '../styles/isp'
 import { ISPModel } from '../database/isp'
 
-function SubjectElements(subject) {
+function SubjectElements(subject, key) {
   return (
-    <DataTable.Row>
-      <DataTable.Cell
+    <View
+      key={key}
+      style={{
+        display: "flex",
+      }}
+    >
+      <View
         style={{
-          flex: 3
+          flex: 1,
+          alignSelf: "stretch",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          margin: 10,
         }}
       >
         <View
           style={{
+            flex: 5,
             flexDirection: "row",
             flexWrap: "wrap",
           }}
         >
-          <Text style={{ fontFamily: "os-regular", flex: 1 }}>
-            {subject.name}
+          <Text style={{ fontFamily: "os-regular" }}>{subject.name}</Text>
+        </View>
+        <View
+          style={{
+            flex: 2,
+            flexDirection: "row",
+            flexWrap: "wrap",
+          }}
+        >
+          <Text
+            style={{ fontFamily: "os-regular", flex: 1, textAlign: "right" }}
+          >
+            {subject.credit}
           </Text>
         </View>
-      </DataTable.Cell>
-      <DataTable.Cell
-        numeric
+        <View
+          style={{
+            flex: 2,
+            flexDirection: "row",
+            flexWrap: "wrap",
+          }}
+        >
+          <Text
+            style={{ fontFamily: "os-regular", flex: 1, textAlign: "right" }}
+          >
+            {subject.mark != 0 ? subject.mark : ""}
+          </Text>
+        </View>
+      </View>
+      <View
         style={{
-          flex: 1,
+          borderBottomColor: "#e7e8eb",
+          borderBottomWidth: 1,
         }}
-      >
-        <Text style={{ fontFamily: "os-regular" }}>{subject.credit}</Text>
-      </DataTable.Cell>
-      <DataTable.Cell
-        numeric
-        style={{
-          flex: 1,
-        }}
-      >
-        <Text style={{ fontFamily: "os-regular" }}>
-          {subject.mark != 0 ? subject.mark : ""}
-        </Text>
-      </DataTable.Cell>
-    </DataTable.Row>
+      ></View>
+    </View>
   );
 }
 
-function TermElements(term) {
+function TermElements(term, key) {
   return (
-    <View style={gStyle.mainContainer}>
-      <Text style={{ fontFamily: "os-regular", fontSize: 20 }}>{term.term}</Text>
-      <DataTable>
-        <DataTable.Header>
-          <DataTable.Cell
+    <View key={key} style={gStyle.mainContainer}>
+      <Text style={{ fontFamily: "os-regular", fontSize: 20 }}>
+        {term.term}
+      </Text>
+      <View
+        style={{
+          display: "flex",
+          padding: 10,
+        }}
+      >
+        <View
+          style={{
+            flex: 1,
+            alignSelf: "stretch",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            margin: 10,
+          }}
+        >
+          <View
             style={{
-              flex: 3,
+              flex: 5,
+              flexDirection: "row",
+              flexWrap: "wrap",
             }}
           >
             <Text style={{ fontFamily: "os-regular" }}>Дисциплина</Text>
-          </DataTable.Cell>
-          <DataTable.Cell
-            numeric
+          </View>
+          <View
             style={{
-              flex: 1,
+              flex: 2,
+              flexDirection: "row",
+              flexWrap: "wrap",
             }}
           >
-            <Text style={{ fontFamily: "os-regular" }}>Кредит</Text>
-          </DataTable.Cell>
-          <DataTable.Cell
-            numeric
+            <Text
+              style={{ fontFamily: "os-regular", flex: 1, textAlign: "right" }}
+            >
+              Кредит
+            </Text>
+          </View>
+          <View
             style={{
-              flex: 1,
+              flex: 2,
+              flexDirection: "row",
+              flexWrap: "wrap",
             }}
           >
-            <Text style={{ fontFamily: "os-regular" }}>Оценка</Text>
-          </DataTable.Cell>
-        </DataTable.Header>
-        {term.subjects.map((subject) => {
-          return SubjectElements(subject);
+            <Text
+              style={{ fontFamily: "os-regular", flex: 1, textAlign: "right" }}
+            >
+              Оценка
+            </Text>
+          </View>
+        </View>
+        <View
+          style={{
+            borderBottomColor: "#dfe2e6",
+            borderBottomWidth: 2,
+          }}
+        ></View>
+        {term.subjects.map((subject, index) => {
+          return SubjectElements(subject, index);
         })}
-      </DataTable>
+      </View>
     </View>
   );
 }
@@ -91,11 +148,11 @@ export default function ISP({ navigation }) {
   return (
     <View>
       <MyHeader navigation={navigation} />
-      <ScrollView vertical={true}>
+      <ScrollView vertical={true} style={{ marginBottom: 80 }}>
         <View style={gStyle.main}>
           <Text style={gStyle.title}>Индивидуальный учебный план</Text>
-          {isp.map((term) => {
-            return TermElements(term);
+          {isp.map((term, index) => {
+            return TermElements(term, index);
           })}
         </View>
       </ScrollView>

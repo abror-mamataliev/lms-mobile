@@ -14,7 +14,6 @@ export const MyHeader = ({ navigation }) => {
           source={require("./assets/logo.png")}
         />
       </TouchableOpacity>
-      <Text style={{ color: "white" }}>Navbar</Text>
     </View>
   )
 }

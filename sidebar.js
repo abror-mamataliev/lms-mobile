@@ -1,10 +1,5 @@
 import React from "react"
-import {
-  SafeAreaView,
-  View,
-  Image,
-  Text
-} from "react-native"
+import { Image, SafeAreaView, ScrollView, Text, View } from "react-native";
 
 import {
   DrawerContentScrollView,
@@ -14,25 +9,28 @@ import {
 export const CustomSidebarMenu = (props) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ alignItems: "center" }}>
-        <Image
-          style={{marginTop: 35}}
-          source={require("./assets/logo.png")}
-      />
-      </View>
-      <DrawerContentScrollView {...props}>
-        <DrawerItemList {...props} />
-      </DrawerContentScrollView>
-      <Text
-        style={{
-          fontSize: 16,
-          textAlign: "center",
-          color: "grey",
-          marginBottom: 20
-        }}
-      >
-        LMS TUIT
-      </Text>
+      <ScrollView vertical={true}>
+        <View style={{ alignItems: "center" }}>
+          <Image
+            style={{ marginTop: 35 }}
+            source={require("./assets/logo.png")}
+          />
+        </View>
+        <DrawerContentScrollView {...props}>
+          <DrawerItemList {...props} />
+        </DrawerContentScrollView>
+        <Text
+          style={{
+            fontSize: 16,
+            textAlign: "center",
+            color: "grey",
+            marginTop: 40,
+            marginBottom: 20,
+          }}
+        >
+          LMS TUIT
+        </Text>
+      </ScrollView>
     </SafeAreaView>
-  )
+  );
 }
