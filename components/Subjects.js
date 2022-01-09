@@ -1,24 +1,14 @@
-import React, { useState } from 'react'
-import {
-  Button,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import React, { useState, useEffect } from "react";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FontAwesome } from "@expo/vector-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
-import { faClone } from "@fortawesome/free-regular-svg-icons"
-import { MyHeader } from "../header";
-import { gStyle } from '../styles/style'
-import { subjectStyle } from '../styles/subject'
-import { SubjectModel } from '../database/subjects'
+import { Header } from "./DrawerNavigation";
+import { gStyle } from "../style";
 
 function SubjectElements(subject, key) {
   return (
     <View
+      key={key}
       style={{
         display: "flex",
         padding: 10,
@@ -226,69 +216,38 @@ function SubjectElements(subject, key) {
         }}
       ></View>
     </View>
-    // <View key={key} style={subjectStyle.tableRow}>
-    //   <View style={subjectStyle.tableRowElements}>
-    //     <View style={subjectStyle.tableRowElementsKey}>
-    //       <Text style={subjectStyle.tableKeyText}>Дисциплина</Text>
-    //     </View>
-    //     <View style={subjectStyle.tableRowElementsValue}>
-    //       <Text style={subjectStyle.tableValueText}>{subject.name}</Text>
-    //     </View>
-    //   </View>
-    //   <View style={subjectStyle.tableRowElements}>
-    //     <View style={subjectStyle.tableRowElementsKey}>
-    //       <Text style={subjectStyle.tableKeyText}>Преподаватель</Text>
-    //     </View>
-    //     <View style={subjectStyle.tableRowElementsValue}>
-    //       <Text style={subjectStyle.tableValueText}>{subject.teacher}</Text>
-    //     </View>
-    //   </View>
-    //   <View style={subjectStyle.tableRowElements}>
-    //     <View style={subjectStyle.tableButtonKey}>
-    //       <Text style={subjectStyle.tableKeyText}>Кол-во НБ</Text>
-    //     </View>
-    //     <View style={subjectStyle.tableButtonValue}>
-    //       {/* <View style={subjectStyle.tableButtonDiv}></View> */}
-    //       <Text style={subjectStyle.tableButton}>{subject.absence_number}</Text>
-    //     </View>
-    //   </View>
-    //   <View style={subjectStyle.tableRowElements}>
-    //     <View style={subjectStyle.tableButtonKey}>
-    //       <Text style={subjectStyle.tableKeyText}>Действие</Text>
-    //     </View>
-    //     <View style={subjectStyle.tableButtonValue2}>
-    //       <Text style={subjectStyle.tableButton}>
-    //         <FontAwesome name="clone" color="#1d2d5b" />
-    //         {/* <FontAwesomeIcon icon={faClone} style={{ color: "#1d2d5b" }} /> */}
-    //         <Text> Активности</Text>
-    //       </Text>
-    //     </View>
-    //   </View>
-    //   <View style={subjectStyle.hr}></View>
-    // </View>
   );
 }
 
 export default function Subjects({ navigation }) {
-  const [subjects, setSubjects] = useState(SubjectModel);
+  const [subjects, setSubjects] = useState([]);
+
+  useEffect(() => {
+    const dataLoad = async () => {
+      try {
+        const result = await AsyncStorage.getItem("subjects");
+        const info = result != null ? JSON.parse(result) : null;
+        setSubjects(info);
+      } catch (e) {
+        console.warn(e);
+      }
+    };
+    dataLoad();
+  }, []);
 
   return (
     <View>
-      <MyHeader navigation={navigation} />
+      <Header navigation={navigation} />
       <ScrollView vertical={true} style={{ marginBottom: 80 }}>
         <View style={gStyle.main}>
           <Text style={gStyle.title}>Мои предметы</Text>
           <View style={gStyle.mainContainer}>
-            {subjects.map((subject, index) => {
+            {subjects ? subjects.map((subject, index) => {
               return SubjectElements(subject, index);
-            })}
+            }) : null}
           </View>
         </View>
       </ScrollView>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  
-})

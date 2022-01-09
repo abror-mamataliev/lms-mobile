@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import { Image, Text, View } from "react-native";
 import AppLoading from 'expo-app-loading'
 import { fonts } from './fonts'
-import { MyHeader } from './header'
-import { CustomSidebarMenu } from './sidebar'
+import { Sidebar } from "./components/DrawerNavigation";
 import Dashboard from './components/Dashboard'
 import Subjects from './components/Subjects'
 import Schedule from './components/Schedule'
@@ -52,7 +51,7 @@ export default function Navigate() {
     return (
       <NavigationContainer>
         <Drawer.Navigator
-          drawerContent={(props) => <CustomSidebarMenu {...props} />}
+          drawerContent={(props) => <Sidebar {...props} />}
           screenOptions={{
             headerShown: false,
             drawerStyle: {

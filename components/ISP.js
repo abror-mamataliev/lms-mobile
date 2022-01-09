@@ -1,10 +1,8 @@
-import React, { useState } from "react"
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
-import { DataTable } from "react-native-paper"
-import { MyHeader } from "../header";
-import { gStyle } from '../styles/style'
-import { ispStyle } from '../styles/isp'
-import { ISPModel } from '../database/isp'
+import React, { useState, useEffect } from "react";
+import { ScrollView, Text, View } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Header } from "./DrawerNavigation";
+import { gStyle } from "../style";
 
 function SubjectElements(subject, key) {
   return (
@@ -143,23 +141,32 @@ function TermElements(term, key) {
 }
 
 export default function ISP({ navigation }) {
-  const [isp, setIsp] = useState(ISPModel);
+  const [isp, setIsp] = useState([]);
+
+  useEffect(() => {
+    const dataLoad = async () => {
+      try {
+        const result = await AsyncStorage.getItem("isp");
+        const info = result != null ? JSON.parse(result) : null;
+        setIsp(info);
+      } catch (e) {
+        console.warn(e);
+      }
+    };
+    dataLoad();
+  }, []);
 
   return (
     <View>
-      <MyHeader navigation={navigation} />
+      <Header navigation={navigation} />
       <ScrollView vertical={true} style={{ marginBottom: 80 }}>
         <View style={gStyle.main}>
           <Text style={gStyle.title}>Индивидуальный учебный план</Text>
-          {isp.map((term, index) => {
+          {isp ? isp.map((term, index) => {
             return TermElements(term, index);
-          })}
+          }) : null}
         </View>
       </ScrollView>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  
-})
