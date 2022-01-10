@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
+import { useDispatch, useSelector } from "react-redux"
 import {
   Image,
   Picker,
@@ -12,13 +13,26 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 import { Entypo } from "@expo/vector-icons";
+import { ShowDr } from '../redux/actions/Action'
+// import reducer from '../redux/reducer'
+
+var stateDropdown = false
 
 export const Header = ({ navigation }) => {
-  const [dropdown, setDropdown] = useState("none")
-  const [selectedValue, setSelectedValue] = useState("java");
+  const dispatch = useDispatch();
+  const dataDropdown = useSelector((state) => state);
+  // const [state, dispatch] = useReducer(reducer);
   const openMenu = () => {
     navigation.openDrawer();
   };
+  const openDropdown = () => {
+    dataDropdown.show.showDropdown === false
+      ? dispatch(ShowDr(true))
+      : dispatch(ShowDr(false));
+    // dispatch({type: "show"})
+    // stateDropdown = state.show;
+  };
+  // console.log(state);
   return (
     <View
       style={{
@@ -32,7 +46,7 @@ export const Header = ({ navigation }) => {
       <TouchableOpacity onPress={openMenu}>
         <Entypo name="menu" size={40} color="black" />
       </TouchableOpacity>
-      <TouchableOpacity onPress={openMenu}>
+      <TouchableOpacity onPress={openDropdown}>
         <Image
           style={{
             width: 40,
@@ -40,28 +54,6 @@ export const Header = ({ navigation }) => {
           }}
           source={require("../assets/avatar.jpg")}
         />
-        {/* <View
-          style={{
-            position: "absolute",
-            backgroundColor: "#ff0000",
-            marginTop: 20,
-            marginRight: 0,
-            marginLeft: -110,
-            zIndex: 3, // works on ios
-            elevation: 3, // works on android
-          }}
-        >
-          <Picker
-            selectedValue={selectedValue}
-            style={{ height: 50, width: 150 }}
-            onValueChange={(itemValue, itemIndex) =>
-              setSelectedValue(itemValue)
-            }
-          >
-            <Picker.Item label="Java" value="java" />
-            <Picker.Item label="JavaScript" value="js" />
-          </Picker>
-        </View> */}
       </TouchableOpacity>
     </View>
   );
@@ -93,3 +85,32 @@ export const Sidebar = (props) => {
     </SafeAreaView>
   );
 };
+
+export function Dropdown() {
+  const dataDropdown = useSelector((state) => state);
+  console.log(dataDropdown.show.showDropdown);
+  return (
+    <>
+      {dataDropdown.show.showDropdown ? (
+        <View
+          style={{
+            position: "absolute",
+            top: 80,
+            right: 10,
+            zIndex: 1000, // works on ios
+            elevation: 1000, // works on android
+            backgroundColor: "#ffffff",
+          }}
+        >
+          <TouchableOpacity style={{ padding: 15 }}>
+            <Text>Настройки</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={{ padding: 15 }}>
+            <Text>Выход</Text>
+          </TouchableOpacity>
+        </View>
+       ) : null} 
+    </>
+  );
+};
+

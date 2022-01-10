@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FontAwesome } from "@expo/vector-icons";
-import { Header } from "./DrawerNavigation";
+import { Header, Dropdown } from "./DrawerNavigation";
 import { appStyle, subjectStyle, textBold, textRegular } from "../style";
 
 function SubjectElements(subject, key) {
@@ -75,6 +75,7 @@ export default function Subjects({ navigation }) {
   return (
     <View>
       <Header navigation={navigation} />
+      <Dropdown />
       <ScrollView vertical={true} style={{ marginBottom: 80 }}>
         <View style={appStyle.main}>
           <Text style={appStyle.title}>Мои предметы</Text>

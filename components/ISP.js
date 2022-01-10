@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ScrollView, Text, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Header } from "./DrawerNavigation";
+import { Header, Dropdown } from "./DrawerNavigation";
 import { appStyle, ispStyle, textBold, textRegular } from "../style";
 
 function SubjectElements(subject, key) {
@@ -73,6 +73,7 @@ export default function ISP({ navigation }) {
   return (
     <View>
       <Header navigation={navigation} />
+      <Dropdown />
       <ScrollView vertical={true} style={{ marginBottom: 80 }}>
         <View style={appStyle.main}>
           <Text style={appStyle.title}>Индивидуальный учебный план</Text>
